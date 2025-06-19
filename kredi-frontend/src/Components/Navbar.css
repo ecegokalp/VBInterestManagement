@@ -1,0 +1,43 @@
+﻿.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffc107; /* VakıfBank sarısı */
+    padding: 10px 30px;
+    height: 80px;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-logo {
+    height: 80px;
+    margin-right: 15px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: black;
+}
+
+.navbar-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+    .navbar-links a {
+        color: black;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .navbar-links a:hover {
+            color: white;
+        }

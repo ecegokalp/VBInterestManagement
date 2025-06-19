@@ -1,0 +1,124 @@
+﻿vb-wrapper {
+    padding: 40px;
+    background: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+.vb-form {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 1300px;
+    margin: auto;
+}
+
+.vb-left {
+    background: #fff8e1;
+    padding: 30px;
+    border-radius: 12px;
+    flex: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.vb-field {
+    margin-bottom: 20px;
+}
+
+    .vb-field label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    .vb-field input,
+    .vb-field select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-top: 5px;
+    }
+
+        .vb-field input[type=range] {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+.vb-calculate {
+    background: #ffb700;
+    border: none;
+    padding: 12px 25px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+}
+
+.vb-right {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    flex: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.vb-summary {
+    text-align: center;
+}
+
+.vb-box {
+    margin-bottom: 25px;
+}
+
+.vb-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.vb-label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.vb-value {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.vb-rates {
+    margin-top: 20px;
+    font-size: 15px;
+    color: #444;
+}
+
+.vb-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+    justify-content: center;
+}
+
+.vb-plan-btn,
+.vb-apply-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.vb-plan-btn {
+    background: #fff;
+    border: 2px solid #ffb700;
+    color: #333;
+}
+
+.vb-apply-btn {
+    background: #ffb700;
+    font-weight: bold;
+    color: #000;
+}
