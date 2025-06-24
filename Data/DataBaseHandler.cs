@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using InterestCalculationAPI.Controllers;
 using InterestCalculationAPI.Models;
 using Microsoft.Data.Sqlite;
 namespace InterestCalculationAPI.Data
@@ -38,19 +40,21 @@ namespace InterestCalculationAPI.Data
         remainingDebt REAL);";
             paymentcmd.ExecuteNonQuery();
         }
-        public List<PaymentPlan> GeneratePaymentPlan(string CreditType, double creditAmount, int term, double monthlyRate)
+        public CreditCalculationResult GeneratePaymentPlan(CreditType creditType, double creditAmount, int term, double monthlyRate)
         {
             var result = new List<PaymentPlan>();
             double remainingDebt = creditAmount;
+            double totalPayment = 0, totalKKDF = 0, totalBSMV = 0;
+            bool isKonutKredisi = creditType == CreditType.KonutKredisi;
 
             double monthlyPayment = (creditAmount * monthlyRate * Math.Pow(1 + monthlyRate, term)) /
-                                    (Math.Pow(1 + monthlyRate, term) - 1);
+                                  (Math.Pow(1 + monthlyRate, term) - 1);
 
             for (int i = 0; i < term; i++)
             {
                 double interest = remainingDebt * monthlyRate;
-                double kkdf = (CreditType == "Konut Kredisi") ? 0 : interest * 0.15;
-                double bsmv = (CreditType == "Konut Kredisi") ? 0 : interest * 0.15;
+                double kkdf = isKonutKredisi ? 0 : interest * 0.15;
+                double bsmv = isKonutKredisi ? 0 : interest * 0.15;
                 double principal = monthlyPayment - interest;
                 remainingDebt -= principal;
 
@@ -65,12 +69,19 @@ namespace InterestCalculationAPI.Data
                     remainingDebt = remainingDebt
                 });
 
+                totalPayment += monthlyPayment;
+                totalKKDF += kkdf;
+                totalBSMV += bsmv;
             }
 
-            return result;
+            return new CreditCalculationResult
+            {
+                MonthlyPayment = monthlyPayment,
+                TotalPayment = totalPayment,
+                TotalKKDF = totalKKDF,
+                TotalBSMV = totalBSMV,
+                PaymentPlans = result
+            };
         }
-
-
-
     }
-}
+    }

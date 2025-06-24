@@ -3,27 +3,53 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
+
+// CORS Politikasýný Geliþtirme 
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowAllForDev",
+            policy =>
+            {
+                policy.AllowAnyOrigin()  
+                     .AllowAnyHeader()
+                     .AllowAnyMethod();
+            });
+    });
+}
+else
+{
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowSpecificOrigins",
+            policy =>
+            {
+                policy.WithOrigins("http://localhost:3000", "https://siteniz.com") // Üretimde sadece belirli origin'ler
+                     .AllowAnyHeader()
+                     .AllowAnyMethod();
+            });
+    });
+}
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// HTTP Request Pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
 
+app.UseStaticFiles();
 app.UseRouting();
 
+
+app.UseCors(builder.Environment.IsDevelopment() ? "AllowAllForDev" : "AllowSpecificOrigins");
+
 app.UseAuthorization();
-
 app.MapRazorPages();
-
 app.MapControllers();
 
 app.Run();
-
-

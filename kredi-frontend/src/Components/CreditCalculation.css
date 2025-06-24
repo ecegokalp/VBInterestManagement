@@ -1,7 +1,8 @@
-﻿vb-wrapper {
-    padding: 40px;
-    background: #f9f9f9;
-    font-family: Arial, sans-serif;
+﻿.vb-wrapper {
+    padding: 50px 20px;
+    background: #f5f7fa;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
 }
 
 .vb-form {
@@ -9,95 +10,185 @@
     gap: 30px;
     align-items: flex-start;
     justify-content: center;
-    max-width: 1300px;
-    margin: auto;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .vb-left {
-    background: #fff8e1;
-    padding: 30px;
-    border-radius: 12px;
-    flex: 1;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    padding: 40px;
+    border-radius: 16px;
+    width: 50%;
+    max-width:600px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+    .vb-left:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+    }
+
 .vb-field {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
     .vb-field label {
         display: block;
-        font-weight: bold;
-        margin-bottom: 6px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #333;
+        font-size: 15px;
     }
 
     .vb-field input,
     .vb-field select {
         width: 100%;
-        padding: 10px;
+        padding: 12px 15px;
         font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
         margin-top: 5px;
+        transition: all 0.3s ease;
+        background: #fafafa;
     }
 
-        .vb-field input[type=range] {
-            width: 100%;
-            margin-top: 10px;
+        .vb-field input:focus,
+        .vb-field select:focus {
+            border-color: #ffb700;
+            box-shadow: 0 0 0 3px rgba(255, 183, 0, 0.2);
+            background: #fff;
+            outline: none;
         }
 
+        .vb-field input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            outline: none;
+            transition: background 0.3s;
+            margin-top: 12px;
+        }
+
+            .vb-field input[type=range]::-webkit-slider-runnable-track {
+                height: 8px;
+                background: linear-gradient(90deg, #ffb700, #ff8f00);
+                border-radius: 4px;
+            }
+
+            .vb-field input[type=range]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 24px;
+                height: 24px;
+                background: #000;
+                border-radius: 50%;
+                cursor: pointer;
+                margin-top: -8px;
+                border: 3px solid #fff;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+                transition: all 0.2s ease;
+            }
+
+                .vb-field input[type=range]::-webkit-slider-thumb:hover {
+                    transform: scale(1.1);
+                    background: #333;
+                }
+
+            .vb-field input[type=range]::-moz-range-track {
+                height: 8px;
+                background: linear-gradient(90deg, #ffb700, #ff8f00);
+                border-radius: 4px;
+            }
+
+            .vb-field input[type=range]::-moz-range-thumb {
+                width: 24px;
+                height: 24px;
+                background: #000;
+                border-radius: 50%;
+                cursor: pointer;
+                border: 3px solid #fff;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            }
+
 .vb-calculate {
-    background: #ffb700;
+    background: linear-gradient(135deg, #ffb700, #ff9500);
     border: none;
-    padding: 12px 25px;
+    padding: 14px 25px;
     font-size: 18px;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     width: 100%;
-    font-weight: bold;
+    font-weight: 600;
+    color: #000;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 183, 0, 0.3);
 }
+
+    .vb-calculate:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(255, 183, 0, 0.4);
+    }
 
 .vb-right {
     background: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    flex: 1;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px; /* 40px'den 30px'e indirdim */
+    border-radius: 16px;
+    width: 35%; /* Sabit genişlik yerine yüzde kullandım */
+    max-width: 400px; /* Maksimum genişlik ekledim */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    align-self: stretch; /* Yüksekliği eşit tutmak için */
 }
+
+    .vb-right:hover {
+        transform: translateY(-5px);
+    }
 
 .vb-summary {
     text-align: center;
 }
 
+
 .vb-box {
-    margin-bottom: 25px;
+    margin-bottom: 20px; /* 30px'den 20px'e indirdim */
+    padding: 20px; /* 25px'den 20px'e indirdim */
+    border-radius: 12px;
+    background: #f9f9f9;
+    transition: all 0.3s ease;
 }
 
+    .vb-box:hover {
+        background: #f5f5f5;
+        transform: translateY(-3px);
+    }
+
 .vb-icon {
-    font-size: 36px;
-    margin-bottom: 10px;
+    font-size: 32px; /* 40px'den 32px'e indirdim */
+    margin-bottom: 12px; /* 15px'den 12px'e indirdim */
 }
 
 .vb-label {
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 15px; /* 17px'den 15px'e indirdim */
 }
 
 .vb-value {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 5px;
+    font-size: 22px; /* 28px'den 22px'e indirdim */
+    margin-top: 6px; /* 8px'den 6px'e indirdim */
 }
 
 .vb-rates {
-    margin-top: 20px;
-    font-size: 15px;
-    color: #444;
+    margin-top: 20px; /* 25px'den 20px'e indirdim */
+    font-size: 14px; /* 15px'den 14px'e indirdim */
 }
+
 
 .vb-buttons {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     margin-top: 25px;
     justify-content: center;
 }
@@ -105,10 +196,12 @@
 .vb-plan-btn,
 .vb-apply-btn {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 15px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 .vb-plan-btn {
@@ -117,8 +210,30 @@
     color: #333;
 }
 
+    .vb-plan-btn:hover {
+        background: #fff8e8;
+        transform: translateY(-2px);
+    }
+
 .vb-apply-btn {
-    background: #ffb700;
-    font-weight: bold;
+    background: linear-gradient(135deg, #ffb700, #ff9500);
     color: #000;
+    box-shadow: 0 4px 12px rgba(255, 183, 0, 0.3);
+}
+
+    .vb-apply-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(255, 183, 0, 0.4);
+    }
+
+/* Responsive ayarlar */
+@media (max-width: 1024px) {
+    .vb-form {
+        flex-direction: column;
+    }
+
+    .vb-left, .vb-right {
+        width: 100%;
+        max-width: 100%;
+    }
 }
