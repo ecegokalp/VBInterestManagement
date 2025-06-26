@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using InterestCalculationAPI.Data;
+using InterestCalculationAPI.Services;
 using InterestCalculationAPI.Models;
 
 namespace InterestCalculationAPI.Controllers
@@ -8,11 +8,11 @@ namespace InterestCalculationAPI.Controllers
     [Route("api/payment")]
     public class PaymentController : ControllerBase
     {
-        private readonly DataBaseHandler _db;
+        private readonly PaymentService _paymentService;
 
         public PaymentController()
         {
-            _db = new DataBaseHandler();
+            _paymentService = new PaymentService();
         }
 
         [HttpPost("calculate")]
@@ -29,7 +29,7 @@ namespace InterestCalculationAPI.Controllers
                 if (!Enum.TryParse<CreditType>(cleanedType, true, out var creditEnum))
                     return BadRequest("Geçersiz kredi türü girdiniz.");
 
-                var result = _db.GeneratePaymentPlan(creditEnum, request.CreditAmount, request.Term, request.InterestRate);
+                var result = _paymentService.GeneratePaymentPlan(creditEnum, request.CreditAmount, request.Term, request.InterestRate);
                 bool isKonutKredisi = creditEnum == CreditType.KonutKredisi; 
                 return Ok(new
                 {

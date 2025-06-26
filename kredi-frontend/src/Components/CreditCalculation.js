@@ -2,13 +2,19 @@
 import './CreditCalculation.css';
 import { FaCalendarCheck, FaCoins } from 'react-icons/fa';
 import { useEffect } from "react";
+import PaymentPlanTable from './PaymentPlanTable';
+import { useNavigate } from 'react-router-dom'; 
+
 function CreditCalculation() {
+    const[paymentPlans, setpaymentPlans]= useState([]);
     const [creditType, setCreditType] = useState("İHTİYAÇ KREDİSİ");
     const [summary, setSummary] = useState(null);
     const [amount, setAmount] = useState(100000);
     const [term, setTerm] = useState(3);
     const [interestRate, setInterestRate] = useState(3.19);
     const [showPlan, setShowPlan] = useState(false);
+    const navigate = useNavigate();
+
     const getmaxterm = () => {
         switch (creditType) {
             case "İHTİYAÇ KREDİSİ":
@@ -28,8 +34,7 @@ function CreditCalculation() {
     };
     const getLimits= (type) => creditLimits[type]|| { min:0 ,max:1000000 };
     const limits = getLimits(creditType);
-    const handleAmountChange = (val) => {
-        setAmount(Math.min(Math.max(val, limits.min), limits.max));
+    const handleAmountChange = (val) => { setAmount(Math.min(Math.max(val, limits.min), limits.max));
     };
     useEffect(() => {
        setTerm(3);
@@ -89,6 +94,7 @@ function CreditCalculation() {
                 kkdfRate: result.kkdfRate || (creditType === "KONUT KREDİSİ" ? 0 : 15),
                 bsmvRate: result.bsmvRate || (creditType === "KONUT KREDİSİ" ? 0 : 15)
             });
+            setpaymentPlans(result.plans || []);
 
             setShowPlan(true);
         } catch (error) {
@@ -124,12 +130,7 @@ function CreditCalculation() {
                         </div>
                         <div className="vb-field">
                         <label>Faiz Oranı (%)</label>
-                        <input
-                            type="text"
-                            value={interestRate}
-                            onChange={(e) => {
-                                const val = e.target.value;
-                                if (val === "" || /^(\d+([.,]?\d{0,2})?)?$/.test(val) && parseFloat(val.replace(",", ".")) <= 10) {
+                        <input type="text" value={interestRate} onChange={(e) => {const val = e.target.value;if (val === "" || /^(\d+([.,]?\d{0,2})?)?$/.test(val) && parseFloat(val.replace(",", ".")) <= 10) {
                                     setInterestRate(val);
                                 }
                             }}
@@ -159,7 +160,7 @@ function CreditCalculation() {
                             <p>BSMV: %{showPlan ? (summary?.bsmvRate || 0) : 0}</p>
                         </div>
                         <div className="vb-buttons">
-                            <button className="vb-plan-btn">➜ Ödeme Planı</button>
+                            <button className="vb-plan-btn" type="button" onClick={() => navigate('/plan', { state: { plans: paymentPlans } })}>➜ Ödeme Planı</button>
                             <button className="vb-apply-btn">Hemen Başvur</button>
                         </div>
                     </div>

@@ -1,0 +1,44 @@
+﻿.vb-payment-plan {
+    margin: 40px auto;
+    max-width: 1000px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+    .vb-payment-plan h3 {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .vb-payment-plan table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 16px;
+    }
+
+    .vb-payment-plan th,
+    .vb-payment-plan td {
+        padding: 14px 12px;
+        text-align: center;
+    }
+
+    .vb-payment-plan th {
+        background-color: #ffc107;
+        color: black;
+        font-weight: bold;
+        font-size: 16px;
+        border-bottom: 2px solid #e0e0e0;
+    }
+
+    .vb-payment-plan tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .vb-payment-plan tr:hover {
+        background-color: #fff3cd;
+        transition: background-color 0.3s ease;
+    }

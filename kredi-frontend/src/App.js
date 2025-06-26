@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import CreditCalculation from './Components/CreditCalculation';
 import DepositInterest from './Components/DepositInterest';
-
+import PaymentPlanTable from './Components/PaymentPlanTable';
 function App() {
 
     return (
@@ -15,6 +15,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<CreditCalculation />} />
                     <Route path="/deposit" element={<DepositInterest />} />
+                    <Route path="/plan" element={<PaymentPlanTable /> } />
                 </Routes>
             </div>
         </Router>
