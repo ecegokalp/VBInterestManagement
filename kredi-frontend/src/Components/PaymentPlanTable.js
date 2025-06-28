@@ -31,13 +31,13 @@ const PaymentPlanTable = () => {
                     {plans.map((plan, index) => (
                         <tr key={index}>
                             <td>{index + 1}</td>
-                            <td>{new Date(plan.expiryDate).toLocaleDateString()}</td>
-                            <td>{plan.monthlyTax.toFixed(2)} TL</td>
-                            <td>{plan.principalAmount.toFixed(2)} TL</td>
-                            <td>{plan.interestAmount.toFixed(2)} TL</td>
-                            <td>{plan.kkdf.toFixed(2)} TL</td>
-                            <td>{plan.bsmv.toFixed(2)} TL</td>
-                            <td>{plan.remainingDebt.toFixed(2)} TL</td>
+                            <td>{new Date(plan.expiryDate).toLocaleDateString('tr-TR')}</td>
+                            <td>{plan.monthlyTax.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL</td>
+                            <td>{plan.principalAmount.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL</td>
+                            <td>{plan.interestAmount.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL</td>
+                            <td>{plan.kkdf.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL</td>
+                            <td>{plan.bsmv.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL</td>
+                            <td>{plan.remainingDebt.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL</td>
                         </tr>
                     ))}
                 </tbody>
