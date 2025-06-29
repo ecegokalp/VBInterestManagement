@@ -1,5 +1,6 @@
 ﻿using InterestCalculationAPI.Models;
 using InterestCalculationAPI.Controllers;
+using System.Net.NetworkInformation;
 
 namespace InterestCalculationAPI.Services
 {
@@ -68,5 +69,22 @@ namespace InterestCalculationAPI.Services
                 PaymentPlans = result
             };
         }
+        public CreditCalculationResult GeneratePaymentPlanByInstallment(CreditType creditType, double monthlyPayment, int term, double interestRate)
+        {
+            const double KKDF = 0.15;
+            const double BSMV = 0.15;
+
+            bool isKonutKredisi = creditType == CreditType.KonutKredisi;
+            double taxMultiplier = isKonutKredisi ? 1.0 : (1 + KKDF + BSMV);
+            double effectiveRate = interestRate * taxMultiplier;
+
+            // Anapara ters annuite formülüyle çıkarılır
+            double creditAmount = monthlyPayment * (1 - Math.Pow(1 + effectiveRate, -term)) / effectiveRate;
+            var result = GeneratePaymentPlan(creditType, creditAmount, term, interestRate);
+            result.CreditAmount=Math.Round(creditAmount,2);   
+           return result;
+
+        }
+
     }
 }

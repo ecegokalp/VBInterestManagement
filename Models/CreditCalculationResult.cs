@@ -6,6 +6,7 @@
         public double TotalKKDF { get; set; }
         public double TotalBSMV { get; set; }
         public double MonthlyPayment { get; set; }
+        public double CreditAmount { get; set; }
         public List<PaymentPlan> PaymentPlans { get; set; }
     }
 }
