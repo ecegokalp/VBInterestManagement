@@ -14,7 +14,6 @@ function CreditCalculation() {
     const [interestRate, setInterestRate] = useState(3.19);
     const [showPlan, setShowPlan] = useState(false);
     const navigate = useNavigate();
-
     const formatNumber = (number) => {
         if (isNaN(number) || number === null) return '0,00';
         return Number(number).toLocaleString('tr-TR', {
@@ -22,7 +21,6 @@ function CreditCalculation() {
             maximumFractionDigits: 2
         });
     };
-
     const getMaxTerm = (amount) => {
         if (creditType === "İHTİYAÇ KREDİSİ") {
             if (amount > 0 && amount <= 125000) return 36;
@@ -35,7 +33,6 @@ function CreditCalculation() {
             default: return 36;
         }
     };
-
     const currentMaxTerm = getMaxTerm(mode === "installmentToCredit" ? amount : Number(String(amount).replace(/\./g, '').replace(',', '')));
     
     const creditLimits = {
@@ -43,9 +40,7 @@ function CreditCalculation() {
         "KONUT KREDİSİ": { min: 100000, max: 8500000 },
         "TAŞIT KREDİSİ": { min: 3000, max: 400000 },
     };
-
     const limits = creditLimits[creditType] || { min: 0, max: 1000000 };
-
     const clearResults = () => {
         setSummary(null);
         setPaymentPlans([]);
@@ -66,14 +61,12 @@ function CreditCalculation() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         clearResults();
-        
         const numericInterest = parseFloat((interestRate || "").toString().replace(",", "."));
         if (isNaN(numericInterest) || numericInterest <= 0) {
             alert("Lütfen geçerli bir faiz oranı girin (örn: 3.19)");
             return;
         }
-
-        const mapCreditType = (type) => {
+       const mapCreditType = (type) => {
             switch (type) {
                 case "İHTİYAÇ KREDİSİ": return "IhtiyacKredisi";
                 case "KONUT KREDİSİ": return "KonutKredisi";

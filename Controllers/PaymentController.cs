@@ -96,38 +96,49 @@ namespace InterestCalculationAPI.Controllers
         }
 
         [HttpPost("calculate-deposit")]
-        public IActionResult CalculateDeposit([FromBody] DepositInterest request)
+        public IActionResult CalculateDeposit([FromBody] DepositInterest req)
         {
-            try
+            if (req.depositAmount <= 0 || req.expiryTime <= 0 || string.IsNullOrEmpty(req.depositType) || string.IsNullOrEmpty(req.currency))
+                return BadRequest("Eksik veya hatalı veri!");
+
+            double rate;
+            double stopajOran;
+            string symbol;
+
+            switch (req.currency.ToUpper())
             {
-                if (request.depositAmount <= 0)
-                    return BadRequest("Mevduat tutarı 0'dan büyük olmalıdır.");
-
-                if (request.expiryTime <= 0)
-                    return BadRequest("Vade süresi 0'dan büyük olmalıdır.");
-
-                // Basit mevduat faizi hesaplama
-                double annualRate = GetDepositRate(request.depositType, request.currency, request.expiryTime);
-                double monthlyRate = annualRate / 12 / 100;
-                double totalInterest = request.depositAmount * monthlyRate * request.expiryTime;
-                double totalAmount = request.depositAmount + totalInterest;
-
-                return Ok(new
-                {
-                    depositAmount = Math.Round(request.depositAmount, 2),
-                    totalInterest = Math.Round(totalInterest, 2),
-                    totalAmount = Math.Round(totalAmount, 2),
-                    annualRate = Math.Round(annualRate, 2),
-                    monthlyRate = Math.Round(monthlyRate * 100, 4),
-                    expiryTime = request.expiryTime,
-                    depositType = request.depositType,
-                    currency = request.currency
-                });
+                case "USD":
+                    rate = 0.15; // %0,15
+                    stopajOran = 0.25;
+                    symbol = "$";
+                    break;
+                case "EUR":
+                    rate = 0.10; // %0,10
+                    stopajOran = 0.25;
+                    symbol = "€";
+                    break;
+                default: // TL
+                    rate = req.depositType == "Tanışma Kampanyası" ? 48.5 : 40;
+                    stopajOran = 0.15;
+                    symbol = "₺";
+                    break;
             }
-            catch (Exception ex)
-            {
-                return BadRequest($"Hesaplama sırasında bir hata oluştu: {ex.Message}");
-            }
+
+            double brutFaiz = req.depositAmount * (rate / 100) * (req.expiryTime / 365.0);
+            double stopaj = brutFaiz * stopajOran;
+            double netFaiz = brutFaiz - stopaj;
+            double netTutar = req.depositAmount + netFaiz;
+            return Ok(new {
+                netTutar = Math.Round(netTutar,2),
+                gun = req.expiryTime,
+                faizOran = rate,
+                stopajOran = stopajOran * 100,
+                stopaj = Math.Round(stopaj,2),
+                brutFaiz = Math.Round(brutFaiz,2),
+                netFaiz = Math.Round(netFaiz,2),
+                currency = req.currency,
+                symbol = symbol
+            });
         }
 
         private double GetDepositRate(string depositType, string currency, int expiryTime)
