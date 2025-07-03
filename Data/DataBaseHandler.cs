@@ -32,11 +32,8 @@ namespace InterestCalculationAPI.Data
                 );";
             cmd.ExecuteNonQuery();
         }
-
-        // Kullanıcıdan gelen değerlere göre uygun faiz oranı satırını döner
         public double? GetInterestRate(double amount, int term, string currency = "TL", string productType = "standart")
         {
-            // Parametreleri normalize et
             var normCurrency = (currency ?? "TL").Trim().ToLower();
             var normProductType = (productType ?? "standart").Trim().ToLower();
             Console.WriteLine($"[GetInterestRate] amount={amount}, term={term}, currency={normCurrency}, productType={normProductType}");
@@ -62,7 +59,7 @@ namespace InterestCalculationAPI.Data
             if (result != null && result != DBNull.Value)
                 return Convert.ToDouble(result);
             else
-                return null; // Uygun oran bulunamazsa null döner
+                return null; 
         }
 
         public class FaizOraniModel
@@ -74,6 +71,29 @@ namespace InterestCalculationAPI.Data
             public double Rate { get; set; }
             public string Currency { get; set; } = string.Empty;
             public string ProductType { get; set; } = string.Empty;
+        }
+
+        public class InterestRateJson
+        {
+            public string TermDaysStart { get; set; }
+            public string TermDaysEnd { get; set; }
+            public string CurrentInterestRate { get; set; }
+            public string AmountStart { get; set; }
+            public string AmountEnd { get; set; }
+        }
+        public class DepositInfo
+        {
+            public string CurrencyCode { get; set; }
+            public string ProductType { get; set; }
+            public List<InterestRateJson> InterestRates { get; set; }
+        }
+        public class DataRoot
+        {
+            public DepositInfo DepositInfo { get; set; }
+        }
+        public class RootObject
+        {
+            public DataRoot Data { get; set; }
         }
 
         public void SeedInterestRatesFromJson(string filePath)
@@ -159,8 +179,7 @@ namespace InterestCalculationAPI.Data
 
             using var conn = new SqlConnection(_connectionStr);
             conn.Open();
-
-            foreach (var oran in rates)
+ foreach (var oran in rates)
             {
                 var checkCmd = conn.CreateCommand();
                 checkCmd.CommandText = @"
