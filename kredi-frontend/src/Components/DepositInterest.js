@@ -7,21 +7,36 @@ const oranlar = {
 const stopajOran = 0.15;
 
 export default function DepositInterest() {
-  const [amount, setAmount] = useState(50000);
-  const [gun, setGun] = useState(40);
-  const [product, setProduct] = useState("Tanışma Kampanyası");
-  const [currency, setCurrency] = useState("TRY");
+  const [amount, setAmount] = useState("");
+  const [gun, setGun] = useState("");
+  const [product, setProduct] = useState("");
+  const [currency, setCurrency] = useState("");
   const [result, setResult] = useState(null);
 
   const currencySymbol = result?.symbol || (currency === "USD" ? "$" : currency === "EUR" ? "€" : "₺");
 
   const hesapla = async () => {
     setResult(null);
+    if (!amount || !gun || !product || !currency) {
+      alert("Lütfen tüm alanları doldurun!");
+      return;
+    }
+    console.log({
+      depositType: product,
+      depositAmount: Number(amount),
+      expiryTime: Number(gun),
+      currency: currency
+    });
     try {
       const res = await fetch("https://localhost:7101/api/payment/calculate-deposit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ depositType: product, depositAmount: amount, expiryTime: gun, currency: currency })
+        body: JSON.stringify({
+          depositType: product,
+          depositAmount: Number(amount),
+          expiryTime: Number(gun),
+          currency: currency
+        })
       });
       if (!res.ok) {
         const err = await res.text();
@@ -43,23 +58,25 @@ export default function DepositInterest() {
           <div style={{display:'flex',flexDirection:'column',gap:20}}>
             <label style={{fontWeight:600}}>Mevduat Ürünü
               <select value={product} onChange={e=>setProduct(e.target.value)} style={{marginTop:8,padding:12,borderRadius:8,border:'1px solid #e0e0e0',fontSize:16}}>
-                <option>Tanışma Kampanyası</option>
-                <option>Standart Mevduat</option>
+                <option value="">Seçiniz</option>
+                <option value="standart">Standart Mevduat</option>
+                <option value="tanışma kampanyası">Tanışma Kampanyası</option>
               </select>
             </label>
             <label style={{fontWeight:600}}>Para Birimi
               <select value={currency} onChange={e=>setCurrency(e.target.value)} style={{marginTop:8,padding:12,borderRadius:8,border:'1px solid #e0e0e0',fontSize:16}}>
-                <option value="TRY">TL</option>
+                <option value="">Seçiniz</option>
+                <option value="TL">TL</option>
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
               </select>
             </label>
             <label style={{fontWeight:600}}>Vade Gün Sayısı
-              <input type="number" min={32} max={366} value={gun} onChange={e=>setGun(Number(e.target.value))} style={{marginTop:8,padding:12,borderRadius:8,border:'1px solid #e0e0e0',fontSize:16,width:'100%'}} />
+              <input type="number" min={32} max={366} value={gun} onChange={e=>setGun(e.target.value)} style={{marginTop:8,padding:12,borderRadius:8,border:'1px solid #e0e0e0',fontSize:16,width:'100%'}} />
             </label>
             <label style={{fontWeight:600}}>Tutar
               <div style={{display:'flex',alignItems:'center',gap:8}}>
-                <input type="number" value={amount} onChange={e=>setAmount(Number(e.target.value))} style={{marginTop:8,padding:12,borderRadius:8,border:'1px solid #e0e0e0',fontSize:16,width:'100%'}} />
+                <input type="number" value={amount} onChange={e=>setAmount(e.target.value)} style={{marginTop:8,padding:12,borderRadius:8,border:'1px solid #e0e0e0',fontSize:16,width:'100%'}} />
                 <span style={{fontSize:18,marginTop:8}}>{currencySymbol}</span>
               </div>
             </label>

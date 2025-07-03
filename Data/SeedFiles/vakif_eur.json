@@ -1,0 +1,513 @@
+{
+    "Data": {
+        "DepositInfo": {
+            "CurrencyCode": "EUR",
+            "ProductType": "standart",
+            "InterestRates": [
+                {
+                    "TermDaysEnd": "6",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "1",
+                    "AmountStart": "0",
+                    "AmountEnd": "24999.0"
+                },
+
+                {
+                    "TermDaysEnd": "6",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "1",
+                    "AmountStart": "25000.0",
+                    "AmountEnd": "49999.0"
+                },
+
+                {
+                    "TermDaysEnd": "6",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "1",
+                    "AmountStart": "50000.0",
+                    "AmountEnd": "74999.0"
+                },
+
+                {
+                    "TermDaysEnd": "6",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "1",
+                    "AmountStart": "75000.0",
+                    "AmountEnd": "99999.0"
+                },
+
+                {
+                    "TermDaysEnd": "6",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "1",
+                    "AmountStart": "100000.0",
+                    "AmountEnd": "249999.0"
+                },
+
+                {
+                    "TermDaysEnd": "6",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "1",
+                    "AmountStart": "250000.0",
+                    "AmountEnd": "499999.0"
+                },
+
+                {
+                    "TermDaysEnd": "6",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "1",
+                    "AmountStart": "500000.0",
+                    "AmountEnd": "9.9999999E7"
+                },
+
+                {
+                    "TermDaysEnd": "13",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "7",
+                    "AmountStart": "0",
+                    "AmountEnd": "24999.0"
+                },
+
+                {
+                    "TermDaysEnd": "13",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "7",
+                    "AmountStart": "25000.0",
+                    "AmountEnd": "49999.0"
+                },
+
+                {
+                    "TermDaysEnd": "13",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "7",
+                    "AmountStart": "50000.0",
+                    "AmountEnd": "74999.0"
+                },
+
+                {
+                    "TermDaysEnd": "13",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "7",
+                    "AmountStart": "75000.0",
+                    "AmountEnd": "99999.0"
+                },
+
+                {
+                    "TermDaysEnd": "13",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "7",
+                    "AmountStart": "100000.0",
+                    "AmountEnd": "249999.0"
+                },
+
+                {
+                    "TermDaysEnd": "13",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "7",
+                    "AmountStart": "250000.0",
+                    "AmountEnd": "499999.0"
+                },
+
+                {
+                    "TermDaysEnd": "13",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "7",
+                    "AmountStart": "500000.0",
+                    "AmountEnd": "9.9999999E7"
+                },
+
+                {
+                    "TermDaysEnd": "29",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "14",
+                    "AmountStart": "0",
+                    "AmountEnd": "24999.0"
+                },
+
+                {
+                    "TermDaysEnd": "29",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "14",
+                    "AmountStart": "25000.0",
+                    "AmountEnd": "49999.0"
+                },
+
+                {
+                    "TermDaysEnd": "29",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "14",
+                    "AmountStart": "50000.0",
+                    "AmountEnd": "74999.0"
+                },
+
+                {
+                    "TermDaysEnd": "29",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "14",
+                    "AmountStart": "75000.0",
+                    "AmountEnd": "99999.0"
+                },
+
+                {
+                    "TermDaysEnd": "29",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "14",
+                    "AmountStart": "100000.0",
+                    "AmountEnd": "249999.0"
+                },
+
+                {
+                    "TermDaysEnd": "29",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "14",
+                    "AmountStart": "250000.0",
+                    "AmountEnd": "499999.0"
+                },
+
+                {
+                    "TermDaysEnd": "29",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "14",
+                    "AmountStart": "500000.0",
+                    "AmountEnd": "9.9999999E7"
+                },
+
+                {
+                    "TermDaysEnd": "31",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "30",
+                    "AmountStart": "0",
+                    "AmountEnd": "24999.0"
+                },
+
+                {
+                    "TermDaysEnd": "31",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "30",
+                    "AmountStart": "25000.0",
+                    "AmountEnd": "49999.0"
+                },
+
+                {
+                    "TermDaysEnd": "31",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "30",
+                    "AmountStart": "50000.0",
+                    "AmountEnd": "74999.0"
+                },
+
+                {
+                    "TermDaysEnd": "31",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "30",
+                    "AmountStart": "75000.0",
+                    "AmountEnd": "99999.0"
+                },
+
+                {
+                    "TermDaysEnd": "31",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "30",
+                    "AmountStart": "100000.0",
+                    "AmountEnd": "249999.0"
+                },
+
+                {
+                    "TermDaysEnd": "31",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "30",
+                    "AmountStart": "250000.0",
+                    "AmountEnd": "499999.0"
+                },
+
+                {
+                    "TermDaysEnd": "31",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "30",
+                    "AmountStart": "500000.0",
+                    "AmountEnd": "9.9999999E7"
+                },
+
+                {
+                    "TermDaysEnd": "45",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "32",
+                    "AmountStart": "0",
+                    "AmountEnd": "24999.0"
+                },
+
+                {
+                    "TermDaysEnd": "45",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "32",
+                    "AmountStart": "25000.0",
+                    "AmountEnd": "49999.0"
+                },
+
+                {
+                    "TermDaysEnd": "45",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "32",
+                    "AmountStart": "50000.0",
+                    "AmountEnd": "74999.0"
+                },
+
+                {
+                    "TermDaysEnd": "45",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "32",
+                    "AmountStart": "75000.0",
+                    "AmountEnd": "99999.0"
+                },
+
+                {
+                    "TermDaysEnd": "45",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "32",
+                    "AmountStart": "100000.0",
+                    "AmountEnd": "249999.0"
+                },
+
+                {
+                    "TermDaysEnd": "45",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "32",
+                    "AmountStart": "250000.0",
+                    "AmountEnd": "499999.0"
+                },
+
+                {
+                    "TermDaysEnd": "45",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "32",
+                    "AmountStart": "500000.0",
+                    "AmountEnd": "9.9999999E7"
+                },
+
+                {
+                    "TermDaysEnd": "91",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "46",
+                    "AmountStart": "0",
+                    "AmountEnd": "24999.0"
+                },
+
+                {
+                    "TermDaysEnd": "91",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "46",
+                    "AmountStart": "25000.0",
+                    "AmountEnd": "49999.0"
+                },
+
+                {
+                    "TermDaysEnd": "91",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "46",
+                    "AmountStart": "50000.0",
+                    "AmountEnd": "74999.0"
+                },
+
+                {
+                    "TermDaysEnd": "91",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "46",
+                    "AmountStart": "75000.0",
+                    "AmountEnd": "99999.0"
+                },
+
+                {
+                    "TermDaysEnd": "91",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "46",
+                    "AmountStart": "100000.0",
+                    "AmountEnd": "249999.0"
+                },
+
+                {
+                    "TermDaysEnd": "91",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "46",
+                    "AmountStart": "250000.0",
+                    "AmountEnd": "499999.0"
+                },
+
+                {
+                    "TermDaysEnd": "91",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "46",
+                    "AmountStart": "500000.0",
+                    "AmountEnd": "9.9999999E7"
+                },
+
+                {
+                    "TermDaysEnd": "181",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "92",
+                    "AmountStart": "0",
+                    "AmountEnd": "24999.0"
+                },
+
+                {
+                    "TermDaysEnd": "181",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "92",
+                    "AmountStart": "25000.0",
+                    "AmountEnd": "49999.0"
+                },
+
+                {
+                    "TermDaysEnd": "181",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "92",
+                    "AmountStart": "50000.0",
+                    "AmountEnd": "74999.0"
+                },
+
+                {
+                    "TermDaysEnd": "181",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "92",
+                    "AmountStart": "75000.0",
+                    "AmountEnd": "99999.0"
+                },
+
+                {
+                    "TermDaysEnd": "181",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "92",
+                    "AmountStart": "100000.0",
+                    "AmountEnd": "249999.0"
+                },
+
+                {
+                    "TermDaysEnd": "181",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "92",
+                    "AmountStart": "250000.0",
+                    "AmountEnd": "499999.0"
+                },
+
+                {
+                    "TermDaysEnd": "181",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "92",
+                    "AmountStart": "500000.0",
+                    "AmountEnd": "9.9999999E7"
+                },
+
+                {
+                    "TermDaysEnd": "365",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "182",
+                    "AmountStart": "0",
+                    "AmountEnd": "24999.0"
+                },
+
+                {
+                    "TermDaysEnd": "365",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "182",
+                    "AmountStart": "25000.0",
+                    "AmountEnd": "49999.0"
+                },
+
+                {
+                    "TermDaysEnd": "365",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "182",
+                    "AmountStart": "50000.0",
+                    "AmountEnd": "74999.0"
+                },
+
+                {
+                    "TermDaysEnd": "365",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "182",
+                    "AmountStart": "75000.0",
+                    "AmountEnd": "99999.0"
+                },
+
+                {
+                    "TermDaysEnd": "365",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "182",
+                    "AmountStart": "100000.0",
+                    "AmountEnd": "249999.0"
+                },
+
+                {
+                    "TermDaysEnd": "365",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "182",
+                    "AmountStart": "250000.0",
+                    "AmountEnd": "499999.0"
+                },
+
+                {
+                    "TermDaysEnd": "365",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "182",
+                    "AmountStart": "500000.0",
+                    "AmountEnd": "9.9999999E7"
+                },
+
+                {
+                    "TermDaysEnd": "750",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "366",
+                    "AmountStart": "0",
+                    "AmountEnd": "24999.0"
+                },
+
+                {
+                    "TermDaysEnd": "750",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "366",
+                    "AmountStart": "25000.0",
+                    "AmountEnd": "49999.0"
+                },
+
+                {
+                    "TermDaysEnd": "750",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "366",
+                    "AmountStart": "50000.0",
+                    "AmountEnd": "74999.0"
+                },
+
+                {
+                    "TermDaysEnd": "750",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "366",
+                    "AmountStart": "75000.0",
+                    "AmountEnd": "99999.0"
+                },
+
+                {
+                    "TermDaysEnd": "750",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "366",
+                    "AmountStart": "100000.0",
+                    "AmountEnd": "249999.0"
+                },
+
+                {
+                    "TermDaysEnd": "750",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "366",
+                    "AmountStart": "250000.0",
+                    "AmountEnd": "499999.0"
+                },
+
+                {
+                    "TermDaysEnd": "750",
+                    "CurrentInterestRate": "0.05",
+                    "TermDaysStart": "366",
+                    "AmountStart": "500000.0",
+                    "AmountEnd": "9.9999999E7"
+                }
+            ]
+        }
+    }
+}

@@ -1,6 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using InterestCalculationAPI.Services;
 using InterestCalculationAPI.Models;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using InterestCalculationAPI.Data;
 
 namespace InterestCalculationAPI.Controllers
 {
@@ -8,15 +15,14 @@ namespace InterestCalculationAPI.Controllers
     [Route("api/payment")]
     public class PaymentController : ControllerBase
     {
-        private readonly PaymentService _paymentService;
+        private readonly DataBaseHandler _dbHandler;
 
-        public PaymentController()
+        public PaymentController(DataBaseHandler dbHandler)
         {
-            _paymentService = new PaymentService();
+            _dbHandler = dbHandler;
         }
 
         [HttpPost("calculate")]
-       
         public IActionResult Calculate([FromBody] CreditRequest request)
         {
             try
@@ -29,7 +35,8 @@ namespace InterestCalculationAPI.Controllers
                 if (!Enum.TryParse<CreditType>(cleanedType, true, out var creditEnum))
                     return BadRequest("Geçersiz kredi türü girdiniz.");
 
-                var result = _paymentService.GeneratePaymentPlan(creditEnum, request.CreditAmount, request.Term, request.InterestRate);
+                var paymentService = new PaymentService();
+                var result = paymentService.GeneratePaymentPlan(creditEnum, request.CreditAmount, request.Term, request.InterestRate);
                 bool isKonutKredisi = creditEnum == CreditType.KonutKredisi; 
                 return Ok(new
                 {
@@ -48,7 +55,6 @@ namespace InterestCalculationAPI.Controllers
             }
         }
 
-
         [HttpPost("calculate-by-installment")]
         public IActionResult CalculateByInstallment([FromBody] InstallmentRequest request)
         {
@@ -62,7 +68,8 @@ namespace InterestCalculationAPI.Controllers
                 if (!Enum.TryParse<CreditType>(cleanedType, true, out var creditEnum))
                     return BadRequest("Geçersiz kredi türü girdiniz.");
 
-                var result = _paymentService.GeneratePaymentPlanByInstallment(
+                var paymentService = new PaymentService();
+                var result = paymentService.GeneratePaymentPlanByInstallment(
                     creditEnum,
                     request.MonthlyInstallment,
                     request.Term,
@@ -101,101 +108,43 @@ namespace InterestCalculationAPI.Controllers
             if (req.depositAmount <= 0 || req.expiryTime <= 0 || string.IsNullOrEmpty(req.depositType) || string.IsNullOrEmpty(req.currency))
                 return BadRequest("Eksik veya hatalı veri!");
 
-            double rate;
-            double stopajOran;
-            string symbol;
+            // veritabanından oranı çek
+            var rate = _dbHandler.GetInterestRate(req.depositAmount, req.expiryTime, req.currency, req.depositType);
 
-            switch (req.currency.ToUpper())
-            {
-                case "USD":
-                    rate = 0.15; // %0,15
-                    stopajOran = 0.25;
-                    symbol = "$";
-                    break;
-                case "EUR":
-                    rate = 0.10; // %0,10
-                    stopajOran = 0.25;
-                    symbol = "€";
-                    break;
-                default: // TL
-                    rate = req.depositType == "Tanışma Kampanyası" ? 48.5 : 40;
-                    stopajOran = 0.15;
-                    symbol = "₺";
-                    break;
-            }
+            if (!rate.HasValue)
+                return BadRequest("Uygun faiz oranı bulunamadı.");
 
-            double brutFaiz = req.depositAmount * (rate / 100) * (req.expiryTime / 365.0);
+            double stopajOran = 0.15; 
+            string symbol = req.currency.ToUpper() == "USD" ? "$" :
+                            req.currency.ToUpper() == "EUR" ? "€" : "₺";
+
+            double brutFaiz = req.depositAmount * (rate.Value / 100) * (req.expiryTime / 365.0);
             double stopaj = brutFaiz * stopajOran;
             double netFaiz = brutFaiz - stopaj;
             double netTutar = req.depositAmount + netFaiz;
-            return Ok(new {
-                netTutar = Math.Round(netTutar,2),
+
+            return Ok(new
+            {
+                netTutar = Math.Round(netTutar, 2),
                 gun = req.expiryTime,
-                faizOran = rate,
+                faizOran = rate.Value,
                 stopajOran = stopajOran * 100,
-                stopaj = Math.Round(stopaj,2),
-                brutFaiz = Math.Round(brutFaiz,2),
-                netFaiz = Math.Round(netFaiz,2),
+                stopaj = Math.Round(stopaj, 2),
+                brutFaiz = Math.Round(brutFaiz, 2),
+                netFaiz = Math.Round(netFaiz, 2),
                 currency = req.currency,
                 symbol = symbol
             });
         }
 
-        private double GetDepositRate(string depositType, string currency, int expiryTime)
+        [HttpGet("get-deposit-rate")]
+        public IActionResult GetDepositRate(double amount, int term, string currency = "TL", string productType = "standart")
         {
-            // Basit faiz oranları (gerçek uygulamada veritabanından alınır)
-            if (currency.ToUpper() == "TRY")
-            {
-                switch (depositType.ToUpper())
-                {
-                    case "VADELİ MEVDUAT":
-                        if (expiryTime <= 1) return 25.0; // 1 ay
-                        if (expiryTime <= 3) return 30.0; // 3 ay
-                        if (expiryTime <= 6) return 35.0; // 6 ay
-                        if (expiryTime <= 12) return 40.0; // 12 ay
-                        return 45.0; // 12+ ay
-                    case "VADESİZ MEVDUAT":
-                        return 5.0;
-                    case "ALTIN MEVDUAT":
-                        return 15.0;
-                    default:
-                        return 25.0;
-                }
-            }
-            else if (currency.ToUpper() == "USD")
-            {
-                switch (depositType.ToUpper())
-                {
-                    case "VADELİ MEVDUAT":
-                        if (expiryTime <= 1) return 3.5;
-                        if (expiryTime <= 3) return 4.0;
-                        if (expiryTime <= 6) return 4.5;
-                        if (expiryTime <= 12) return 5.0;
-                        return 5.5;
-                    case "VADESİZ MEVDUAT":
-                        return 1.0;
-                    default:
-                        return 3.5;
-                }
-            }
-            else if (currency.ToUpper() == "EUR")
-            {
-                switch (depositType.ToUpper())
-                {
-                    case "VADELİ MEVDUAT":
-                        if (expiryTime <= 1) return 2.5;
-                        if (expiryTime <= 3) return 3.0;
-                        if (expiryTime <= 6) return 3.5;
-                        if (expiryTime <= 12) return 4.0;
-                        return 4.5;
-                    case "VADESİZ MEVDUAT":
-                        return 0.5;
-                    default:
-                        return 2.5;
-                }
-            }
-
-            return 25.0; // Varsayılan
+            var rate = _dbHandler.GetInterestRate(amount, term, currency, productType);
+            if (rate.HasValue)
+                return Ok(rate.Value);
+            else
+                return NotFound("Uygun faiz oranı bulunamadı.");
         }
     }
 }
